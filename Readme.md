@@ -8,6 +8,18 @@ my JVM skills.
 There are no tests, any opinions for what should be tested and how is much
 appreciated. Logging verbosity is not configured again same as with logging.
 
+There is also no proper failure management. I've not decided what level of
+consistency failure recovery this should be built for, as we the more
+interesting usecases essentially do CDC from the order books. Proper recovery
+when there is an outage in the stream requires a new snapshot to acquired after
+the stream as been restarted. This is not an issue for the `level2` channel as
+it always starts with such a message, however for full this is neccessary.
+
+For kafka outages I need to read more about the asynchronous producer mode that
+is used, it seems it has some built in buffer limitations and could actually
+transparently solve the reconnection at the cheapest possible cost of increased
+delivery latency.
+
 ## Running - Docker
 The following compose file works decently, it is not considered supported
 or endorsed. If you have a need to run this service you probably know what
