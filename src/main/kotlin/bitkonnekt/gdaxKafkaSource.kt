@@ -9,10 +9,6 @@ import io.github.cdimascio.dotenv.dotenv
 import com.google.gson.GsonBuilder
 
 
-val BOOTSTRAP_SERVERS = "localhost:9092"
-val SNAPPY_FLAG = "snappy"
-
-
 fun createProducer(
         bootstrap_servers: String,
         compression: String,
